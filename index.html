@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DC: Auto-Register</title>
+    <style>
+      .select-all-text {
+        user-select: all;
+        -moz-user-select: all;
+        -webkit-user-select: all;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="crns" placeholder="1111,2234,2423" />
+    <button onclick="onClick()">save</button>
+    <div style="margin-top: 2rem">
+      <textarea
+        class="select-all-text"
+        style="width: 30rem; height: 20rem; user-select: all"
+        id="code"
+        placeholder="click save after adding the crns..."
+      ></textarea>
+    </div>
+  </body>
+  <script>
+    function getCode(crns) {
+      return `const CRNS=[${crns}];async function wait(t){return new Promise(e=>{setTimeout(e,t)})}async function getCrns(t){const e=window.document;if(e.getElementById("addAnotherCRN")){for(var n=0;n<t.length;n++)e.getElementById("addAnotherCRN").click();for(var c=0;c<t.length;c++)e.getElementById(\txt_crn\${c+1}\).value=t[c];e.getElementById("addCRNbutton").click(),await wait(500),e.getElementById("saveButton").click()}}const run=()=>{getCrns(CRNS)};getCrns(CRNS);`
+    }
+    function onClick() {
+      const crns = document
+        .getElementById('crns')
+        .value.replaceAll(/\s/g, '')
+        .split(',')
+      console.log(crns)
+      document.getElementById('code').innerHTML = getCode(crns)
+    }
+  </script>
+</html>
